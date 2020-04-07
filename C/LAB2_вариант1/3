@@ -1,0 +1,60 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<malloc.h>
+#define C 1000 //массив из C эементов
+
+int main()
+{
+	int N, n, even = 1; //even по возраствнию 1 ,не возраствнию 0
+	float temp, middle, num;
+	float ArrA[C] = { }; //пустой массив
+
+	printf("enter n "); scanf("%i", &n);
+	for (int i = 0; i < n; i++)
+	{
+		printf("enter num ");
+		scanf("%f", &num);
+		ArrA[i] = num;
+	}
+
+
+	for (int i = 0; i < n - 1; i++)
+	{
+		if (ArrA[i] > ArrA[i + 1])
+		{
+			even = 0;
+			middle = ArrA[i + 1];
+			break;
+		}
+	}
+
+	if (even == 1)
+	{
+		int add = 1;
+		for (int i = 0; i < (n / 2); i++)
+		{
+			ArrA[i] = ArrA[i + add];
+			add++;
+		}
+		//до этого удалял числа через 1 а после этой строчки сотру остальные (поменяю на 0)
+		for (int i = n / 2; i < (2 * n); i++)
+		{
+			ArrA[i] = 0;
+		}
+	}
+	else
+	{
+		for (int i = (n + 1); i > (n / 2); i--)
+		{
+			ArrA[i] = ArrA[i - 1];
+		}
+
+		ArrA[n / 2] = middle;
+	}
+
+	printf("\n Result matrix: ");
+	for (int i = 0; i < n + 1; i++)
+	{
+		printf(" %f", ArrA[i]);
+	}
+}

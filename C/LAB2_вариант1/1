@@ -1,0 +1,35 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<malloc.h>
+int main()
+#define C 1000 //массив из C эементов
+
+{
+	int n;
+	float num;
+	float A[C] = { }; 
+	float B[C] = { }; //пустой массив
+
+	printf("enter n "); scanf("%i", &n);
+	for (int i = 0; i < n; i++)
+	{
+		printf("enter num ");
+		scanf("%f", &num);
+		A[i] = num;
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		float middle = 0;
+		for (int j = 0; j < n; j++)
+		{
+			if (j != i) // добавляю в массив B ответ исключая A[i]
+			{
+				middle += A[j];
+			}
+		}
+		B[i] = middle / (n - 1);
+		printf(" %f", B[i]);
+	}
+	return 0;
+}
