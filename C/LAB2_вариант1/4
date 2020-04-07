@@ -1,24 +1,35 @@
-##define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<malloc.h>
 #define C 100 
 #define CC 100 
 int main()
 {
-	int N, M, n;
-	float num;
-	float A[C][CC] = { }; // С строк CC СТОЛБОВ
-	float B[C] = { }; //ОДНОМЕРНый
+	int N, M, n, simple=0;
+	int A[C][CC] = { }; // С строк CC СТОЛБОВ
+	int B[C] = { }; //ОДНОМЕРНый
 	printf("Enter matrix NxM");
 	printf("\n Enter N "); scanf("%i", &N); //СТРОКИ
 	printf("\n Enter M "); scanf("%i", &M);	//СТОЛБЦЫ
 
 	for (int j = 0; j < M; j++) //ЗАПОЛНЯЕМ МАССИВ И ВЫЧИСЛЯЕМ ОТВЕТЫ
-	{
+	{	
 		for (int i = 0; i < N; i++)
 		{
-			scanf("%f", &A[i][j]);
-			B[i] = A[i][j] + B[i];
+			scanf("\n%i", &A[i][j]);
+			if (A[i][j] > 1)
+			{
+				for (n = 2; n < A[i][j]; n++)
+				{
+					if (A[i][j] % n == 0)
+					{
+						simple = simple + A[i][j];
+						break;
+					}
+				}
+				B[i] = A[i][j] + B[i] - simple;
+				simple = 0;
+			}
 		}
 	}
 
@@ -27,7 +38,7 @@ int main()
 	{
 		for (int i = 0; i < N; i++)
 		{
-			printf("%f ", A[i][j]);
+			printf("%i ", A[i][j]);
 		}
 		printf("\n");
 	}
@@ -35,6 +46,6 @@ int main()
 	printf("matrix result: \n");
 	for (int i = 0; i < N; i++)
 	{
-		printf("%f ", B[i]);
+		printf("%i ", B[i]);
 	}
 }
